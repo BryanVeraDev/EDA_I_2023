@@ -2,13 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package ABB;
+package Ejercicios.ArbolesTrabajoFinal;
 
+import ABB.Arbol;
+import ABB.Node;
 import ListaD.ListaDoble;
 
 /**
  *
- * @author Estudiante
+ * @author Bryan Vera
  */
 public class Test {
     public static void main(String[] args) {
@@ -85,6 +87,7 @@ public class Test {
         tmp2.addFinal(9);
         
         a2 = a2.transformacionListaDobleAArbol(tmp2);
+        a2.recorrerPostOrden(a2.getRaiz());
         
         
     }

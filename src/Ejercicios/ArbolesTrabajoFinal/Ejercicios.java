@@ -2,161 +2,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package ABB;
+package Ejercicios.ArbolesTrabajoFinal;
 
+import ABB.Arbol;
+import ABB.Node;
 import ListaD.ListaDoble;
 
 /**
  *
- * @author Estudiante
+ * @author BRYAN VERA
  */
-public class Arbol<A> {
-    
-    private Node<A> raiz;
-
-    /**
-     * @return the raiz
-     */
-    public Node<A> getRaiz() {
-        return raiz;
-    }
-
-    /**
-     * @param raiz the raiz to set
-     */
-    public void setRaiz(Node<A> raiz) {
-        this.raiz = raiz;
-    }
-    
-    
-    public void insertar(Integer elemento){     
-       if(raiz == null){
-           raiz = new Node(elemento);
-       }else{
-           raiz.add(elemento);  
-       }
-    }
-
-    
-    public void recorrerInOrden(Node<A> raiz){
-        if (raiz != null){
-            recorrerInOrden(raiz.getArbolIzquierdo());
-            System.out.println("dato: " + raiz.getDato());
-            recorrerInOrden(raiz.getArbolDerecho());
-        }else{
-            return;
-        }
-    }
-
-    
-    public void recorrerPreOrden(Node<A> raiz){
-        if (raiz != null){  
-            System.out.println("dato: " + raiz.getDato());
-            recorrerPreOrden(raiz.getArbolIzquierdo());
-            recorrerPreOrden(raiz.getArbolDerecho());   
-        }else{
-            return;
-        }
-    }
-    
-    public void recorrerPostOrden(Node<A> raiz){
-        if (raiz != null){  
-            recorrerPostOrden(raiz.getArbolIzquierdo());
-            recorrerPostOrden(raiz.getArbolDerecho());
-            System.out.println("dato: " + raiz.getDato());
-        }else{
-            return;
-        }
-    }
-    
-    public int contarHojas(Node nodo){
-         if(nodo != null){
-            if(nodo.getArbolIzquierdo()== null && nodo.getArbolDerecho()== null)
-                return 1;
-         } else 
-            return 0;
-         
-        int cantidadNodoIzd = contarHojas(nodo.getArbolIzquierdo());
-        int cantidadNodoDer = contarHojas(nodo.getArbolDerecho());
-        
-        return cantidadNodoIzd + cantidadNodoDer;
-    }
-    
-    public int contarNodos(Node nodo){
-        if(nodo != null) 
-             return 1+ contarNodos(nodo.getArbolIzquierdo())+ contarNodos(nodo.getArbolDerecho());
-        else 
-             return 0;
-    }
-     
-    public Node eliminarNodoRec(Node<Integer> raiz, int valor) {
-        if (raiz == null)
-            return raiz;
-
-        if (valor < raiz.getDato())
-            raiz.setArbolIzquierdo(eliminarNodoRec(raiz.getArbolIzquierdo(), valor));
-        else if (valor > raiz.getDato())
-            raiz.setArbolDerecho(eliminarNodoRec(raiz.getArbolDerecho(), valor));
-        else {
-            if (raiz.getArbolIzquierdo() == null)
-                return raiz.getArbolDerecho();
-            else if (raiz.getArbolDerecho() == null)
-                return raiz.getArbolIzquierdo();
-
-            raiz.setDato(encontrarMinimo(raiz.getArbolDerecho()));
-            raiz.setArbolDerecho(eliminarNodoRec(raiz.getArbolDerecho(), (Integer)raiz.getDato()));
-        }
-
-        return raiz;
-    }
-
-    // Retorna la distancia entre los nodos con valor v1 y v2
-    public int distanciaEntreNodos(int v1, int v2) {
-        Node ancestroComun = buscarAncestroComun(raiz, v1, v2);
-        int distancia1 = distanciaEntreNodoYValor(ancestroComun, v1);
-        int distancia2 = distanciaEntreNodoYValor(ancestroComun, v2);
-        return distancia1 + distancia2;
-    }
-    
-    // Retorna el nodo que es el ancestro común más cercano a los nodos con valor v1 y v2
-    public Node buscarAncestroComun(Node nodo, int v1, int v2) {
-        if (nodo == null) {
-            return null;
-        }
-        
-        if ((Integer)nodo.getDato() == v1 || (Integer)nodo.getDato() == v2) {
-            return nodo;
-        }
-
-        Node izq = buscarAncestroComun(nodo.getArbolIzquierdo(), v1, v2);   
-        Node der = buscarAncestroComun(nodo.getArbolDerecho(), v1, v2);
-
-        
-        if (izq != null && der != null) {
-            return nodo;
-        } else if (izq != null) {
-            return izq;
-        } else {
-            return der;
-        }
-    }
-    
-    // Retorna la distancia entre un nodo y un valor de nodo dado
-    public int distanciaEntreNodoYValor(Node nodo, int valor) {
-        if (nodo == null) {
-            return -1;
-        }
-        
-        int distancia = -1;
-        
-        if (((Integer)nodo.getDato()== valor) || 
-           ((distancia = distanciaEntreNodoYValor(nodo.getArbolIzquierdo(), valor)) >= 0) || 
-           ((distancia = distanciaEntreNodoYValor(nodo.getArbolDerecho(), valor)) >= 0)) {
-            distancia++;
-        }
-        
-        return distancia;
-    }
+public class Ejercicios {
     
     // Retorna el valor del nodo minimo
     public int encontrarMinimo(Node<Integer> raiz) {
@@ -357,10 +213,5 @@ public class Arbol<A> {
         node1.setDato((Integer)node2.getDato());
         node2.setDato(temp);
     }
-    
-    
-    
-    
-    
     
 }

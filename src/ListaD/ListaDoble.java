@@ -15,6 +15,11 @@ public class ListaDoble<A> implements Estructura<A> {
 
     Node<A> inicio;
     Node<A> ultimo;
+    int size;
+
+    public int getSize() {
+        return size;
+    }
 
 
     public Node<A> getInicio() {
@@ -40,11 +45,13 @@ public class ListaDoble<A> implements Estructura<A> {
         if(inicio == null){
             inicio = nuevo;
             ultimo = nuevo;
+            size++;
         }
         else{
             nuevo.setSiguiente(inicio);
             inicio.setAnterior(nuevo);
             inicio = nuevo;
+            size++;
         }
     }
 
@@ -53,13 +60,15 @@ public class ListaDoble<A> implements Estructura<A> {
         Node nuevo = new Node();
         nuevo.setDato(dato);
         if(ultimo == null){
-        inicio = nuevo;
-        ultimo = nuevo;
+            inicio = nuevo;
+            ultimo = nuevo;
+            size++;
         }
         else{
             ultimo.setSiguiente(nuevo);
             nuevo.setAnterior(ultimo);
-            ultimo = nuevo;
+            ultimo = nuevo; 
+            size++;
         }
     }
     
@@ -94,12 +103,13 @@ public class ListaDoble<A> implements Estructura<A> {
             if(ultimo == inicio){
                 //ultimo = null;
                 //inicio = null;
-                inicioIgualFinal();
+                inicioIgualFinal();             
             }
             else{
                 inicio = inicio.getSiguiente();
                 inicio.setAnterior(null);
             }
+            size--;
         }
         return aux.getDato();
     }
@@ -117,12 +127,13 @@ public class ListaDoble<A> implements Estructura<A> {
             if(ultimo == inicio){
                 //inicio = null;
                 //ultimo = null;
-                inicioIgualFinal();
+                inicioIgualFinal();              
             }
             else{
                 ultimo = ultimo.getAnterior();
-                ultimo.setSiguiente(null);
+                ultimo.setSiguiente(null);            
             }
+            size--;
         }
         return aux.getDato();
         
@@ -137,12 +148,15 @@ public class ListaDoble<A> implements Estructura<A> {
                 Objeto = dato;
                 inicio = null;
                 ultimo = null;
+                size--;
             }else{
                 if(inicio.getDato() == dato){
                     eliminarInicio();
+                    size--;
                 }else{
                     if(ultimo.getDato() == dato){
                         eliminarFinal();
+                        size--;
                     }else{
                         
                         Node aux = inicio;
@@ -153,6 +167,7 @@ public class ListaDoble<A> implements Estructura<A> {
                         
                                 aux.getAnterior().setSiguiente(aux.getSiguiente());
                                 aux.getSiguiente().setAnterior(aux.getAnterior()); 
+                                size--;
                                 return Objeto;
                             }
                             aux = aux.getSiguiente(); 
